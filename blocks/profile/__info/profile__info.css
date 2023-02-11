@@ -1,0 +1,6 @@
+.profile__info {
+  width: 336px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

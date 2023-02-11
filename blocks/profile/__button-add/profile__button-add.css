@@ -1,0 +1,10 @@
+.profile__button-add {
+  border: 2px solid #FFFFFF;
+  width: 150px;
+  height: 50px;
+  background-color: #000000;
+  background: url(../../../images/button-add-card.svg);
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+}

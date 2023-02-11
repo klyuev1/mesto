@@ -1,0 +1,32 @@
+/* Подключаем нормалайз */
+@import url(../vendor/normalize.css);
+
+/* Подключаем шрифты */
+@import url(../vendor/fonts/fonts.css);
+
+/* Настраиваем параметры страницы */
+@import url(../blocks/page/page.css);
+
+/* Общие блоки */
+/* Правила для header */
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+/* Правила для profile */
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__section/profile__section.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__title-block/profile__title-block.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__button-edit/profile__button-edit.css);
+@import url(../blocks/profile/__button-add/profile__button-add.css);
+
+/* Правила для elements и element*/
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__sign/element__sign.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__like/element__like.css);
