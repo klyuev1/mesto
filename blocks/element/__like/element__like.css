@@ -4,4 +4,11 @@
   background: #FFFFFF url(../../../images/element-like.svg);
   background-size: 100%;
   border: 0;
+  background-repeat: no-repeat;
+  transition: opacity .2s linear;
+  cursor: pointer;
+}
+
+.element__like:hover {
+  opacity: .5;
 }

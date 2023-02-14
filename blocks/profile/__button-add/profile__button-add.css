@@ -7,4 +7,16 @@
   background-size: 22px 22px;
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity .2s linear;
+  cursor: pointer;
+}
+
+.profile__button-add:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 720px){
+  .profile__button-add {
+    width: 100%;
+  }
 }

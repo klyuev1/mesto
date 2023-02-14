@@ -9,4 +9,19 @@
   background-size: 10px 10px;
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity .2s linear;
+  cursor: pointer;
+}
+
+.profile__button-edit:hover {
+  opacity: .6;
+}
+
+
+
+@media screen and (max-width: 540px){
+  .profile__button-edit {
+    width: 18px;
+    height: 18px;
+  }
 }

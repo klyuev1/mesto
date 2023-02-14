@@ -1,8 +1,15 @@
 .elements {
   margin: 0;
-  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
   column-gap: 17px;
   row-gap: 20px;
+  justify-items: center;
+}
+
+@media screen and (max-width: 900px){
+  .elements {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }

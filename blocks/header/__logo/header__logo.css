@@ -2,5 +2,18 @@
   background: url(../../../images/Vector.svg);
   width: 142px;
   height: 33px;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 900px){
+  .header__logo {
+    margin-left: 28px;
+  }
+}
+@media screen and (max-width: 680px){
+  .header__logo {
+    width: 104px;
+    height: 25px;
+  }
 }
