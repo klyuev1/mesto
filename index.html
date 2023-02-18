@@ -13,90 +13,93 @@
     <div class="header__logo"></div>
   </header>
 
-<main>
+  <main>
 
-  <section class="profile">
-    <div class="profile__section">
-      <img class="profile__avatar" src="./images/profile-image.png" alt="аватар человека">
-      <div class="profile__info">
-        <div class="profile__title-block">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__button-edit"></button>
+    <section class="profile">
+      <div class="profile__section">
+        <img class="profile__avatar" src="./images/profile-image.png" alt="аватар человека">
+        <div class="profile__info">
+          <div class="profile__title-block">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__button-edit"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <p class="profile__subtitle">Исследователь океана</p>
       </div>
-    </div>
-    <button class="profile__button-add"></button>
-  </section>
+      <button type="button" class="profile__button-add"></button>
+    </section>
 
-  <section class="elements">
+    <section class="elements">
 
-    <figure class="element">
-      <img class="element__image" src="./images/element-karachaevsk.jpg" alt="Карачаевская крепость">
-      <figcaption class="element__sign">
-        <h3 class="element__title">Карачаевск</h3>
-        <button class="element__like"></button>
-      </figcaption>
-    </figure>
+      <article class="element">
+        <img class="element__image" src="./images/element-karachaevsk.jpg" alt="Карачаевская крепость">
+        <div class="element__sign">
+          <h3 class="element__title">Карачаевск</h3>
+          <button type="button" class="element__like"></button>
+        </div>
+      </article>
 
-    <figure class="element">
-      <img class="element__image" src="./images/element-elbrus.jpg" alt="Гора Эльбрус">
-      <figcaption class="element__sign">
-        <h3 class="element__title">Гора Эльбрус</h3>
-        <button class="element__like"></button>
-      </figcaption>
-    </figure>
+      <article class="element">
+        <img class="element__image" src="./images/element-elbrus.jpg" alt="Гора Эльбрус">
+        <div class="element__sign">
+          <h3 class="element__title">Гора Эльбрус</h3>
+          <button type="button" class="element__like"></button>
+        </div>
+      </article>
 
-    <figure class="element">
-      <img class="element__image" src="./images/element-dombai.jpg" alt="Гора Домбай">
-      <figcaption class="element__sign">
-        <h3 class="element__title">Домбай</h3>
-        <button class="element__like"></button>
-      </figcaption>
-    </figure>
+      <article class="element">
+        <img class="element__image" src="./images/element-dombai.jpg" alt="Гора Домбай">
+        <div class="element__sign">
+          <h3 class="element__title">Домбай</h3>
+          <button type="button" class="element__like"></button>
+        </div>
+      </article>
 
-    <figure class="element">
-      <img class="element__image" src="./images/element-london.jpg" alt="Мост в Лондоне">
-      <figcaption class="element__sign">
-        <h3 class="element__title">Лондон, Великобритания</h3>
-        <button class="element__like"></button>
-      </figcaption>
-    </figure>
+      <article class="element">
+        <img class="element__image" src="./images/element-london.jpg" alt="Мост в Лондоне">
+        <div class="element__sign">
+          <h3 class="element__title">Лондон, Великобритания</h3>
+          <button type="button" class="element__like"></button>
+        </div>
+      </article>
 
-    <figure class="element">
-      <img class="element__image" src="./images/element-newYourk.jpg" alt="Тайм сквер, Нью-Йорк">
-      <figcaption class="element__sign">
-        <h3 class="element__title">Нью-Йорк</h3>
-        <button class="element__like"></button>
-      </figcaption>
-    </figure>
-    
-    <figure class="element">
-      <img class="element__image" src="./images/element-Budapest.jpg" alt="Будапешт">
-      <figcaption class="element__sign">
-        <h3 class="element__title">Будапешт</h3>
-        <button class="element__like"></button>
-      </figcaption>
-    </figure>
+      <article class="element">
+        <img class="element__image" src="./images/element-newYourk.jpg" alt="Тайм сквер, Нью-Йорк">
+        <div class="element__sign">
+          <h3 class="element__title">Нью-Йорк</h3>
+          <button type="button" class="element__like"></button>
+        </div>
+      </article>
+      
+      <article class="element">
+        <img class="element__image" src="./images/element-Budapest.jpg" alt="Будапешт">
+        <div class="element__sign">
+          <h3 class="element__title">Будапешт</h3>
+          <button type="button" class="element__like"></button>
+        </div>
+      </article>
 
-  </section>
+    </section>
+  
+  </main>
 
   <footer class="footer">
     <p class="footer__author">© 2020 Mesto Russia</p>
   </footer>
 
-</main>
+  <section class="popup">
+    <div class="popup__container">
+      <form action="#" class="popup__form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__input popup__input_name" name="name">
+        <input type="text" class="popup__input popup__input_occupation" name="occupation">
+        <button type="submit" class="popup__button-save">Сохранить</button>
+      </form>
 
-<section class="popup">
-  <form action="#" class="popup__container">
-    <h2 class="popup__title">Редактировать профиль</h2>
-    <input type="text" class="popup__input popup__name">
-    <input type="text" class="popup__input popup__occupation">
-    <button type="submit" class="popup__button-save">Сохранить</button>
-    <button type="button" class="popup__button-close"></button>
-  </form>
-</section>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

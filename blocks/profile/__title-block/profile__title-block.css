@@ -4,7 +4,7 @@
   margin-bottom: 10px;
   position: relative;
 }
-@media screen and (max-width: 720px){
+@media screen and (max-width: 800px){
   .profile__title-block {
     margin-left: 42px;
     margin-bottom: 7px;
