@@ -4,8 +4,8 @@ let profileButtonEdit = document.querySelector('.profile__button-edit');
 let popupButtonClose = document.querySelector('.popup__button-close'); 
 let userName = document.querySelector('.profile__title');
 let userOccupation = document.querySelector('.profile__subtitle');
-let inputPopupName = document.querySelector('.popup__input_name');
-let inputPopupOccupation = document.querySelector('.popup__input_occupation');
+let inputPopupName = document.querySelector('.popup__input_type_name');
+let inputPopupOccupation = document.querySelector('.popup__input_type_occupation');
 let formElement = document.querySelector('.popup__form');
 
 // Открытие+закрытие попапа, передача данных в инпут
@@ -26,7 +26,7 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
   userName.textContent = inputPopupName.value;
   userOccupation.textContent = inputPopupOccupation.value;
-  popup.classList.remove('popup_opened');
+  closePopup();
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
