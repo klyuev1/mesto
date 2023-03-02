@@ -26,10 +26,13 @@
 /* Правила для elements и element*/
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__remove/element__remove.css);
+@import url(../blocks/element/__image-button/element__image-button.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__sign/element__sign.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
 
 /* Правила для footer */
 @import url(../blocks/footer/footer.css);
@@ -38,6 +41,7 @@
 /* Неявные блоки */
 /* Правила для popup */
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_type/popup_type_card.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form/popup__form.css);
@@ -45,3 +49,6 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__button-save/popup__button-save.css);
 @import url(../blocks/popup/__button-close/popup__button-close.css);
+@import url(../blocks/popup/__card/popup__card.css);
+@import url(../blocks/popup/__card-image/popup__card-image.css);
+@import url(../blocks/popup/__card-title/popup__card-title.css);

@@ -30,73 +30,55 @@
     </section>
 
     <section class="elements">
-
-      <article class="element">
-        <img class="element__image" src="./images/element-karachaevsk.jpg" alt="Карачаевская крепость">
-        <div class="element__sign">
-          <h3 class="element__title">Карачаевск</h3>
-          <button type="button" class="element__like"></button>
+      <template id="element">
+        <div class="element">
+          <button type="button" class="element__remove"></button>
+          <button type="button" class="element__image-button"><img class="element__image"></button>
+          <div class="element__sign">
+            <h3 class="element__title"></h3>
+            <button type="button" class="element__like"></button>
+          </div>
         </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/element-elbrus.jpg" alt="Гора Эльбрус">
-        <div class="element__sign">
-          <h3 class="element__title">Гора Эльбрус</h3>
-          <button type="button" class="element__like"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/element-dombai.jpg" alt="Гора Домбай">
-        <div class="element__sign">
-          <h3 class="element__title">Домбай</h3>
-          <button type="button" class="element__like"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/element-london.jpg" alt="Мост в Лондоне">
-        <div class="element__sign">
-          <h3 class="element__title">Лондон, Великобритания</h3>
-          <button type="button" class="element__like"></button>
-        </div>
-      </article>
-
-      <article class="element">
-        <img class="element__image" src="./images/element-newYourk.jpg" alt="Тайм сквер, Нью-Йорк">
-        <div class="element__sign">
-          <h3 class="element__title">Нью-Йорк</h3>
-          <button type="button" class="element__like"></button>
-        </div>
-      </article>
-      
-      <article class="element">
-        <img class="element__image" src="./images/element-Budapest.jpg" alt="Будапешт">
-        <div class="element__sign">
-          <h3 class="element__title">Будапешт</h3>
-          <button type="button" class="element__like"></button>
-        </div>
-      </article>
-
+      </template>
     </section>
   
   </main>
 
   <footer class="footer">
-    <p class="footer__author">© 2020 Mesto Russia</p>
+    <p class="footer__author">© 2023 Mesto Russia</p>
   </footer>
 
-  <section class="popup">
+  <section class="popup popup_type_edit-profile">
     <div class="popup__container">
       <form class="popup__form" name="profile">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_type_name" name="name">
-        <input type="text" class="popup__input popup__input_type_occupation" name="occupation">
+        <h2 class="popup__title popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__input" name="name">
+        <input type="text" class="popup__input" name="occupation">
         <button type="submit" class="popup__button-save">Сохранить</button>
       </form>
 
-      <button type="button" class="popup__button-close"></button>
+      <button type="button" class="popup__button-close popup_button-close_type_profile"></button>
+    </div>
+  </section>
+  
+  <section class="popup popup_type_add-card">
+    <div class="popup__container">
+      <form class="popup__form" name="card">
+        <h2 class="popup__title">Новое место</h2>
+        <input type="text" class="popup__input" name="title" placeholder="Название">
+        <input type="text" class="popup__input" name="link" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__button-save">Создать</button>
+      </form>
+
+      <button type="button" class="popup__button-close popup_button-close_type_card"></button>
+    </div>
+  </section>
+
+  <section class="popup popup_type_card">
+    <div class="popup__card">
+      <img class="popup__card-image">
+      <h3 class="popup__card-title"></h3>
+      <button type="button" class="popup__button-close popup_button-close_type_zoom"></button>
     </div>
   </section>
 

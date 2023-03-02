@@ -1,0 +1,8 @@
+.element__image-button {
+  padding: 0;
+  border: none;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+}
