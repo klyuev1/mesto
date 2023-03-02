@@ -31,8 +31,8 @@ const initialCards = [
 // Объявление всех попапов и кнопки закрытия
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
-const popupCloseProfile = document.querySelector('.popup_button-close_type_profile');
-const popupCloseCard = document.querySelector('.popup_button-close_type_card');
+const popupCloseProfile = document.querySelector('.popup__button-close_type_profile');
+const popupCloseCard = document.querySelector('.popup__button-close_type_card');
 // Объявление кнопок добавить и редактировать в профиле
 const cardAdd = document.querySelector('.profile__button-add');
 const profileEdit = document.querySelector('.profile__button-edit');
@@ -53,7 +53,7 @@ const formElementCard = document.querySelector('.popup__form[name=card]');
 const cardImage = document.querySelector('.popup__card-image');
 const cardTitle = document.querySelector('.popup__card-title');
 const popupZoomCard = document.querySelector('.popup_type_card');
-const popupCloseZoom = document.querySelector('.popup_button-close_type_zoom');
+const popupCloseZoom = document.querySelector('.popup__button-close_type_zoom');
 
 
 // Функции открытия и закрытия попапа
