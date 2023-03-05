@@ -1,13 +1,13 @@
 .element__like {
+  border: 0;
   width: 22px;
   height: 19px;
-  background: #FFFFFF url(../../../images/element-like.svg);
-  background-size: 100%;
-  border: 0;
+  background-color: #FFF;
+  background-image: url(../../../images/element-like.svg);
+  background-size: contain;
   background-repeat: no-repeat;
   transition: opacity .2s linear;
   cursor: pointer;
-  box-sizing: border-box;
 }
 
 .element__like:hover {

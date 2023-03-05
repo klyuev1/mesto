@@ -5,7 +5,7 @@
   width: 18px;
   height: 19px;
   background: url(../../../images/remove-card.svg);
-  background-size: 100%;
+  background-size: contain;
   border: 0;
   background-repeat: no-repeat;
   transition: opacity .2s linear;

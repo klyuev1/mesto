@@ -1,32 +1,3 @@
-// Подгружаем массив с карточками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
-
 // Объявление всех переменных
 // Объявление всех попапов и кнопки закрытия
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -44,7 +15,6 @@ const inputPopupOccupation = document.querySelector('.popup__input[name=occupati
 const formElementProfile = document.querySelector('.popup__form[name=profile]');
 // Объявление темплейта и его родительского элемента
 const elements = document.querySelector('.elements');
-const element = document.querySelector('#element').content;
 // Объявление инпутов и формы для карточек
 const inputPopupTitle = document.querySelector('.popup__input[name=title]');
 const inputPopupLink = document.querySelector('.popup__input[name=link]');
@@ -91,74 +61,66 @@ formElementProfile.addEventListener('submit', handleFormSubmitProfile);
 
 // Функция зума
 function handleImgPopup(evt) {
-  openPopup(popupZoomCard);
   cardImage.src = evt.target.src;
+  cardImage.alt = evt.target.alt;
   cardTitle.textContent = evt.target.alt;
+  openPopup(popupZoomCard);
 }
+popupCloseZoom.addEventListener('click', () => closePopup(popupZoomCard));
 
 
-// Обработка массива и добавление его в верстку
-elementAdd = function (item) {
+// Обработка одной фотокарточки из массива
+function elementAdd(item) {
+  const element = document.querySelector('#element').content;
   const elementCopy = element.cloneNode(true);
   const elementImage = elementCopy.querySelector('.element__image');
   const elementTitle = elementCopy.querySelector('.element__title');
-  elementTitle.textContent = item.name;
-  elementImage.setAttribute('src',item.link);
+  const cardZoom = elementCopy.querySelector('.element__image-button');
+  const elementLike = elementCopy.querySelector('.element__like')
+  const deleteCard = elementCopy.querySelector('.element__remove');
 
   //Добавление кнопки "Удалить карточку"
-  const deleteCard = elementCopy.querySelector('.element__remove');
   deleteCard.addEventListener('click', () => {
     const choiseCard = deleteCard.closest('.element');
     choiseCard.remove();
   });
-  //-----------------------------------
 
   //Добавление кнопки "Лайк"
-  elementCopy.querySelector('.element__like').addEventListener('click', function (evt) {
+  elementLike.addEventListener('click',(evt) => {
     evt.target.classList.toggle('element__like_active');
   });
-  //-----------------------------------
 
   //Добавление зума
-  const cardZoom = elementCopy.querySelector('.element__image-button');
   cardZoom.addEventListener('click', handleImgPopup);
-  popupCloseZoom.addEventListener('click', () => closePopup(popupZoomCard));
-  //-----------------------------------
 
-  elements.append(elementCopy);
+  //Присваивание данных из массива элементам
+  elementTitle.textContent = item.name;
+  elementImage.setAttribute('src',item.link);
+  elementImage.setAttribute('alt',item.name);
+
+  return elementCopy;
 };
-initialCards.forEach(elementAdd);
+
+
+// Обработка массива при помощи функции elementAdd
+function addCard(item) {
+const cadrsTemplate = elementAdd(item);
+elements.append(cadrsTemplate);
+};
+initialCards.forEach(addCard);
 
 
 //Добавление новой карточки
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
-  const elementCopy = element.cloneNode(true);
-  const elementImage = elementCopy.querySelector('.element__image');
-  const elementTitle = elementCopy.querySelector('.element__title');
-  elementTitle.textContent = inputPopupTitle.value;
-  elementImage.setAttribute('src',inputPopupLink.value);
-
-  //Добавление кнопки "Удалить карточку"
-  const deleteCard = elementCopy.querySelector('.element__remove');
-  deleteCard.addEventListener('click', () => {
-    const choiseCard = deleteCard.closest('.element');
-    choiseCard.remove();
-  });
-  //-----------------------------------
-  //Добавление кнопки "Лайк"
-  elementCopy.querySelector('.element__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
-  });
-  //-----------------------------------
-
-  //Добавление зума
-  const cardZoom = elementCopy.querySelector('.element__image-button');
-  cardZoom.addEventListener('click', handleImgPopup);
-  popupCloseZoom.addEventListener('click', () => closePopup(popupZoomCard));
-  //-----------------------------------
-
-  elements.prepend(elementCopy);
+  const newCard = {
+    name: inputPopupTitle.value,
+    link: inputPopupLink.value
+  }
+  const cadrsTemplate = elementAdd(newCard);
+  elements.prepend(cadrsTemplate);
   closePopup(popupAddCard);
+  inputPopupTitle.value = '';
+  inputPopupLink.value = '';
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);

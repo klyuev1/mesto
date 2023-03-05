@@ -1,4 +1,5 @@
 .popup_type_card {
   top: center;
   left: center;
+  background-color: rgba(0,0,0,.9);
 }

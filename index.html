@@ -48,7 +48,7 @@
     <p class="footer__author">© 2023 Mesto Russia</p>
   </footer>
 
-  <section class="popup popup_type_edit-profile">
+  <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <form class="popup__form" name="profile">
         <h2 class="popup__title popup__title">Редактировать профиль</h2>
@@ -59,9 +59,9 @@
 
       <button type="button" class="popup__button-close popup__button-close_type_profile"></button>
     </div>
-  </section>
+  </div>
   
-  <section class="popup popup_type_add-card">
+  <div class="popup popup_type_add-card">
     <div class="popup__container">
       <form class="popup__form" name="card">
         <h2 class="popup__title">Новое место</h2>
@@ -72,16 +72,17 @@
 
       <button type="button" class="popup__button-close popup__button-close_type_card"></button>
     </div>
-  </section>
+  </div>
 
-  <section class="popup popup_type_card">
+  <div class="popup popup_type_card">
     <div class="popup__card">
       <img class="popup__card-image">
       <h3 class="popup__card-title"></h3>
       <button type="button" class="popup__button-close popup__button-close_type_zoom"></button>
     </div>
-  </section>
+  </div>
 
+  <script src="./scripts/array.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
