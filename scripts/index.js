@@ -70,7 +70,7 @@ popupCloseZoom.addEventListener('click', () => closePopup(popupZoomCard));
 
 
 // Обработка одной фотокарточки из массива
-function elementAdd(item) {
+function addElement(item) {
   const element = document.querySelector('#element').content;
   const elementCopy = element.cloneNode(true);
   const elementImage = elementCopy.querySelector('.element__image');
@@ -102,9 +102,9 @@ function elementAdd(item) {
 };
 
 
-// Обработка массива при помощи функции elementAdd
+// Обработка массива при помощи функции addElement
 function addCard(item) {
-const cadrsTemplate = elementAdd(item);
+const cadrsTemplate = addElement(item);
 elements.append(cadrsTemplate);
 };
 initialCards.forEach(addCard);
@@ -117,7 +117,7 @@ function handleFormSubmitCard(evt) {
     name: inputPopupTitle.value,
     link: inputPopupLink.value
   }
-  const cadrsTemplate = elementAdd(newCard);
+  const cadrsTemplate = addElement(newCard);
   elements.prepend(cadrsTemplate);
   closePopup(popupAddCard);
   inputPopupTitle.value = '';
