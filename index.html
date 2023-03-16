@@ -50,10 +50,12 @@
 
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
-      <form class="popup__form" name="profile">
-        <h2 class="popup__title popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__input" name="name">
-        <input type="text" class="popup__input" name="occupation">
+      <form class="popup__form" name="profile" novalidate>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input id="name" type="text" class="popup__input" name="name" minlength="2" maxlength="40" required>
+        <span class="name-error"></span>
+        <input id="occupation" type="text" class="popup__input" name="occupation" minlength="2" maxlength="200" required>
+        <span class="occupation-error"></span>
         <button type="submit" class="popup__button-save">Сохранить</button>
       </form>
 
@@ -63,10 +65,12 @@
   
   <div class="popup popup_type_add-card">
     <div class="popup__container">
-      <form class="popup__form" name="card">
+      <form class="popup__form" name="card" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input type="text" class="popup__input" name="title" placeholder="Название" required>
-        <input type="text" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
+        <input id="title" type="text" class="popup__input" name="title" placeholder="Название" minlength="2" maxlength="40" required>
+        <span class="title-error"></span>
+        <input id="link" type="text" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
+        <span class="link-error"></span>
         <button type="submit" class="popup__button-save">Создать</button>
       </form>
 
@@ -82,7 +86,9 @@
     </div>
   </div>
 
+
   <script src="./scripts/array.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

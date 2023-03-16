@@ -7,18 +7,24 @@ const popupCloseCard = document.querySelector('.popup__button-close_type_card');
 // Объявление кнопок добавить и редактировать в профиле
 const cardAdd = document.querySelector('.profile__button-add');
 const profileEdit = document.querySelector('.profile__button-edit');
+// Объявление темплейта и его родительского элемента
+const elements = document.querySelector('.elements');
+
+
+//-----------------------------------------------------------------------------------
 // Объявление инпутов профиля и заголовка,подзаголовка профиля
 const userName = document.querySelector('.profile__title');
 const userOccupation = document.querySelector('.profile__subtitle');
 const inputPopupName = document.querySelector('.popup__input[name=name]');
 const inputPopupOccupation = document.querySelector('.popup__input[name=occupation]');
 const formElementProfile = document.querySelector('.popup__form[name=profile]');
-// Объявление темплейта и его родительского элемента
-const elements = document.querySelector('.elements');
 // Объявление инпутов и формы для карточек
 const inputPopupTitle = document.querySelector('.popup__input[name=title]');
 const inputPopupLink = document.querySelector('.popup__input[name=link]');
 const formElementCard = document.querySelector('.popup__form[name=card]');
+//-----------------------------------------------------------------------------------
+
+
 // Объявление переменных попапа с зумом картинки
 const cardImage = document.querySelector('.popup__card-image');
 const cardTitle = document.querySelector('.popup__card-title');
