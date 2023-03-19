@@ -1,3 +1,13 @@
+// Объявление объекта, используемого в качестве конфига
+const selectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button_disabled'
+}
+
 // Функции, отображающие ошибку в валидации
 const showInputError = (input, formError, errorMessage, inputErrorClass, errorClass) => {
   input.classList.add(inputErrorClass);
@@ -68,35 +78,21 @@ const enableValidation = (config) => {
   });
 }
 
-enableValidation ({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button_disabled'
-});
+enableValidation (selectors);
 
 // Функция сброса ошибки
-selectors = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button_disabled'
-}
-const resetForm = (popup, selectors) => {
-  const formElement = popup.querySelector(selectors.formSelector);
-  const inputList = formElement.querySelectorAll(selectors.inputSelector);
+
+const resetForm = (popup, config) => {
+  const formElement = popup.querySelector(config.formSelector);
+  const inputList = formElement.querySelectorAll(config.inputSelector);
   inputList.forEach((input) => {
     const formError = formElement.querySelector(`.${input.id}-error`);
-    hideInputError(input, formError, selectors.inputErrorClass, selectors.errorClass);
+    hideInputError(input, formError, config.inputErrorClass, config.errorClass);
   });
 }
-const setDefaultButton = (popup, selectors) => {
-  const formElement = popup.querySelector(selectors.formSelector);
-  const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
-  const submitButton = popup.querySelector(selectors.submitButtonSelector);
-  toggleButtonState(submitButton, inputList, selectors.inactiveButtonClass);
+const setDefaultButton = (popup, config) => {
+  const formElement = popup.querySelector(config.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const submitButton = popup.querySelector(config.submitButtonSelector);
+  toggleButtonState(submitButton, inputList, config.inactiveButtonClass);
 }
