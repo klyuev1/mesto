@@ -9,8 +9,6 @@ const cardAdd = document.querySelector('.profile__button-add');
 const profileEdit = document.querySelector('.profile__button-edit');
 // Объявление темплейта и его родительского элемента
 const elements = document.querySelector('.elements');
-
-//-----------------------------------------------------------------------------------
 // Объявление инпутов профиля и заголовка,подзаголовка профиля
 const userName = document.querySelector('.profile__title');
 const userOccupation = document.querySelector('.profile__subtitle');
@@ -21,9 +19,6 @@ const formElementProfile = document.querySelector('.popup__form[name=profile]');
 const inputPopupTitle = document.querySelector('.popup__input[name=title]');
 const inputPopupLink = document.querySelector('.popup__input[name=link]');
 const formElementCard = document.querySelector('.popup__form[name=card]');
-//-----------------------------------------------------------------------------------
-
-
 // Объявление переменных попапа с зумом картинки
 const cardImage = document.querySelector('.popup__card-image');
 const cardTitle = document.querySelector('.popup__card-title');
@@ -31,12 +26,28 @@ const popupZoomCard = document.querySelector('.popup_type_card');
 const popupCloseZoom = document.querySelector('.popup__button-close_type_zoom');
 
 
+// Функция закрытия профиля по клавише Escape
+const ClosePopupKey = (evt,popupElement) => {
+  if (evt.key ==='Escape') {
+    closePopup(popupElement);
+  }
+}
+// Фунция закрытия попапа по нажатию на оверлей
+const ClosePopupOverlay = (evt, popupElement) => {
+  if (evt.currentTarget === evt.target) {
+    closePopup(popupElement);
+  }
+}
 // Функции открытия и закрытия попапа
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => ClosePopupKey(evt, popupElement));
+  popupElement.addEventListener('click', (evt) => ClosePopupOverlay(evt, popupElement));
 }
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', (evt) => ClosePopupKey(evt, popupElement));
+  popupElement.removeEventListener('click', (evt) => ClosePopupOverlay(evt, popupElement));
 }
 
 // Добавление слушателя для кнопки "Редактировать профиль"
@@ -47,23 +58,12 @@ profileEdit.addEventListener('click', () => {
 });
 popupCloseProfile.addEventListener('click', () => closePopup(popupEditProfile));
 
-// Функция закрытия профиля по клавише Escape
-const ClosePopupKey = (evt,popup) => {
-  if (evt.key ==='Escape') {
-    closePopup(popup);
-  }
-}
-document.addEventListener('keydown', (evt) => ClosePopupKey(evt,popupEditProfile));
-document.addEventListener('keydown', (evt) => ClosePopupKey(evt,popupAddCard));
-
-// Фунция закрытия попапа по нажатию на оверлей
-const popup = document.querySelector('.popup');
-popup.addEventListener('click', () => closePopup(popupEditProfile));
-
-
-
 // Добавление слушателя для кнопки "Добавить карточку"
-cardAdd.addEventListener('click', () => openPopup(popupAddCard));
+cardAdd.addEventListener('click', () => {
+  openPopup(popupAddCard);
+  resetForm(popupAddCard, selectors);
+  setDefaultButton(popupAddCard,selectors);
+});
 popupCloseCard.addEventListener('click', () => closePopup(popupAddCard));
 
 

@@ -1,7 +1,3 @@
-// Новый спринт  //  
-// 3ий, 4ый этапы + функция сброса (см чат с Димой)
-
-
 // Функции, отображающие ошибку в валидации
 const showInputError = (input, formError, errorMessage, inputErrorClass, errorClass) => {
   input.classList.add(inputErrorClass);
@@ -11,7 +7,7 @@ const showInputError = (input, formError, errorMessage, inputErrorClass, errorCl
 const hideInputError = (input, formError, inputErrorClass, errorClass) => {
   input.classList.remove(inputErrorClass);
   formError.classList.remove(errorClass);
-  formError.textContent = ''; // функция обнуления //
+  formError.textContent = '';
 };
 
 // Функция, проверяющая валидность инпута
@@ -75,8 +71,32 @@ const enableValidation = (config) => {
 enableValidation ({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_type_error', // Добавить в CSS //
-  errorClass: 'popup__error_visible', // Добавить в CSS //
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
   submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button_disabled' // Добавить в CSS //
+  inactiveButtonClass: 'popup__button_disabled'
 });
+
+// Функция сброса ошибки
+selectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button_disabled'
+}
+const resetForm = (popup, selectors) => {
+  const formElement = popup.querySelector(selectors.formSelector);
+  const inputList = formElement.querySelectorAll(selectors.inputSelector);
+  inputList.forEach((input) => {
+    const formError = formElement.querySelector(`.${input.id}-error`);
+    hideInputError(input, formError, selectors.inputErrorClass, selectors.errorClass);
+  });
+}
+const setDefaultButton = (popup, selectors) => {
+  const formElement = popup.querySelector(selectors.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
+  const submitButton = popup.querySelector(selectors.submitButtonSelector);
+  toggleButtonState(submitButton, inputList, selectors.inactiveButtonClass);
+}
