@@ -2,9 +2,9 @@
   outline: none;
   border:none;
   box-shadow: none;
+  width: 100%;
   border-bottom: 1px solid rgba(0,0,0,.2);
   min-height: 27px;
-  margin-bottom: 30px;
   /* Cтили текста */
   font-family: inherit;
   font-style: normal;
@@ -12,10 +12,7 @@
   font-size: 14px;
   line-height: 17px;
 }
-.popup__input:last-of-type {
-  margin-bottom: 0;
-}
-.popup__input:focus {
+/* .popup__input:focus {
   outline: 2px solid blue;
   border-radius: 2px;
-}
+} */

@@ -10,7 +10,6 @@ const profileEdit = document.querySelector('.profile__button-edit');
 // Объявление темплейта и его родительского элемента
 const elements = document.querySelector('.elements');
 
-
 //-----------------------------------------------------------------------------------
 // Объявление инпутов профиля и заголовка,подзаголовка профиля
 const userName = document.querySelector('.profile__title');
@@ -40,7 +39,6 @@ function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
 
-
 // Добавление слушателя для кнопки "Редактировать профиль"
 profileEdit.addEventListener('click', () => {
   openPopup(popupEditProfile);
@@ -48,6 +46,20 @@ profileEdit.addEventListener('click', () => {
   inputPopupOccupation.value = userOccupation.textContent;
 });
 popupCloseProfile.addEventListener('click', () => closePopup(popupEditProfile));
+
+// Функция закрытия профиля по клавише Escape
+const ClosePopupKey = (evt,popup) => {
+  if (evt.key ==='Escape') {
+    closePopup(popup);
+  }
+}
+document.addEventListener('keydown', (evt) => ClosePopupKey(evt,popupEditProfile));
+document.addEventListener('keydown', (evt) => ClosePopupKey(evt,popupAddCard));
+
+// Фунция закрытия попапа по нажатию на оверлей
+const popup = document.querySelector('.popup');
+popup.addEventListener('click', () => closePopup(popupEditProfile));
+
 
 
 // Добавление слушателя для кнопки "Добавить карточку"

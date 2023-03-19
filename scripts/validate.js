@@ -1,5 +1,5 @@
 // Новый спринт  //  
-// Остановился на том, что отвалились кнопки!
+// 3ий, 4ый этапы + функция сброса (см чат с Димой)
 
 
 // Функции, отображающие ошибку в валидации
@@ -36,12 +36,12 @@ const enableButton = (submitButton, inactiveButtonClass) => {
 
 // Функция проверки валидных инпутов для кнопки submit
 const hasInvalidInput = (inputList) => {
-  return inputList.some((input) => {!input.validity.valid;});
+  return inputList.some((input) => {return !input.validity.valid;});
 }
 
 // Функиция обработки кнопки submit и ее активного состояния
 const toggleButtonState = (submitButton, inputList, inactiveButtonClass) => {
-  if (!hasInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList)) {
     disableButton(submitButton, inactiveButtonClass);
   } else {
     enableButton(submitButton, inactiveButtonClass);
@@ -53,7 +53,7 @@ const setEventListeners = (form, inputList, inputErrorClass, errorClass, inactiv
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
   });
-
+  toggleButtonState(submitButton, inputList, inactiveButtonClass);
   inputList.forEach((input) => {
     input.addEventListener('input', (evt) => {
       checkInputValidity(form, input, inputErrorClass, errorClass);
