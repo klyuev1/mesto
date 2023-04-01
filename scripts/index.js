@@ -95,7 +95,7 @@ function addElement(item) {
   const elementImage = elementCopy.querySelector('.element__image');
   const elementTitle = elementCopy.querySelector('.element__title');
   const cardZoom = elementCopy.querySelector('.element__image-button');
-  const elementLike = elementCopy.querySelector('.element__like')
+  const elementLike = elementCopy.querySelector('.element__like');
   const deleteCard = elementCopy.querySelector('.element__remove');
 
   //Добавление кнопки "Удалить карточку"
