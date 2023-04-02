@@ -1,3 +1,5 @@
+import {Card} from './Card.js';
+import {initialCards} from './array.js'
 // Объявление всех переменных
 // Объявление всех попапов и кнопки закрытия
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -67,8 +69,8 @@ profileEdit.addEventListener('click', () => {
 // Добавление слушателя для кнопки "Добавить карточку"
 cardAdd.addEventListener('click', () => {
   openPopup(popupAddCard);
-  resetForm(popupAddCard, selectors);
-  setDefaultButton(popupAddCard,selectors);
+  elementResetForm(popupAddCard);
+  // setDefaultButton(popupAddCard,selectors);
 });
 
 // Передача данных из попапа в профиль
@@ -81,63 +83,63 @@ function handleFormSubmitProfile(evt) {
 formElementProfile.addEventListener('submit', handleFormSubmitProfile);
 
 // Функция зума
-function handleImgPopup(evt) {
-  cardImage.src = evt.target.src;
-  cardImage.alt = evt.target.alt;
-  cardTitle.textContent = evt.target.alt;
+function handleCardClick(name, link) {
+  cardImage.src = link;
+  cardImage.alt = name;
+  cardTitle.textContent = name;
   openPopup(popupZoomCard);
 }
 
 
-// Обработка одной фотокарточки из массива
-function addElement(item) {
-  const elementCopy = element.cloneNode(true);
-  const elementImage = elementCopy.querySelector('.element__image');
-  const elementTitle = elementCopy.querySelector('.element__title');
-  const cardZoom = elementCopy.querySelector('.element__image-button');
-  const elementLike = elementCopy.querySelector('.element__like');
-  const deleteCard = elementCopy.querySelector('.element__remove');
+// // Обработка одной фотокарточки из массива
+// function addElement(item) {
+//   const elementCopy = element.cloneNode(true);
+//   const elementImage = elementCopy.querySelector('.element__image');
+//   const elementTitle = elementCopy.querySelector('.element__title');
+//   const cardZoom = elementCopy.querySelector('.element__image-button');
+//   const elementLike = elementCopy.querySelector('.element__like');
+//   const deleteCard = elementCopy.querySelector('.element__remove');
 
-  //Добавление кнопки "Удалить карточку"
-  deleteCard.addEventListener('click', () => {
-    const choiseCard = deleteCard.closest('.element');
-    choiseCard.remove();
-  });
+//   //Добавление кнопки "Удалить карточку"
+//   deleteCard.addEventListener('click', () => {
+//     const choiseCard = deleteCard.closest('.element');
+//     choiseCard.remove();
+//   });
 
-  //Добавление кнопки "Лайк"
-  elementLike.addEventListener('click',(evt) => {
-    evt.target.classList.toggle('element__like_active');
-  });
+//   //Добавление кнопки "Лайк"
+//   elementLike.addEventListener('click',(evt) => {
+//     evt.target.classList.toggle('element__like_active');
+//   });
 
-  //Добавление зума
-  cardZoom.addEventListener('click', handleImgPopup);
+//   //Добавление зума
+//   cardZoom.addEventListener('click', handleImgPopup);
 
-  //Присваивание данных из массива элементам
-  elementTitle.textContent = item.name;
-  elementImage.setAttribute('src',item.link);
-  elementImage.setAttribute('alt',item.name);
+//   //Присваивание данных из массива элементам
+//   elementTitle.textContent = item.name;
+//   elementImage.setAttribute('src',item.link);
+//   elementImage.setAttribute('alt',item.name);
 
-  return elementCopy;
-};
+//   return elementCopy;
+// };
 
 
 // Обработка массива при помощи функции addElement
-function addCard(item) {
-const cadrsTemplate = addElement(item);
-elements.append(cadrsTemplate);
-};
-initialCards.forEach(addCard);
-
+initialCards.forEach((item) => {
+  const card = new Card(item, '#element',handleCardClick);
+  const elementCard = card.generateCard();
+  elements.append(elementCard);
+});
 
 //Добавление новой карточки
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
-  const newCard = {
-    name: inputPopupTitle.value,
-    link: inputPopupLink.value
+  const cardList = {
+    link: inputPopupLink.value,
+    name: inputPopupTitle.value
   }
-  const cadrsTemplate = addElement(newCard);
-  elements.prepend(cadrsTemplate);
+  const card = new Card(cardList, '#element', handleCardClick);
+  const elementCard = card.generateCard();
+  elements.prepend(elementCard);
   closePopup(popupAddCard);
   evt.target.reset();
 }

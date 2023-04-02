@@ -80,6 +80,16 @@ const enableValidation = (config) => {
 
 enableValidation (selectors);
 
+
+
+
+
+
+
+
+
+
+
 // Функция сброса ошибки
 
 const resetForm = (popup, config) => {
