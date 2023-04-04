@@ -1,38 +1,32 @@
-// Объявление объекта, используемого в качестве конфига
-const selectors = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button_disabled'
-}
-
-class FormValidator {
-  constructor(config) {
+// Объявление класса
+export class FormValidator {
+  constructor(config, formElement) {
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-    this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
+    this._form = formElement;
+    this._inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+    this._submitButtonSelector = formElement.querySelector(config.submitButtonSelector);
   }
 
   // Методы, отображающие ошибку в валидации
   _showInputError(input, errorMessage) {
+    this._formError = this._form.querySelector(`.${input.id}-error`);
     input.classList.add(this._inputErrorClass);
     this._formError.classList.add(this._errorClass);
     this._formError.textContent = errorMessage;
   }
   _hideInputError(input) {
+    this._formError = this._form.querySelector(`.${input.id}-error`);
     input.classList.remove(this._inputErrorClass);
     this._formError.classList.remove(this._errorClass);
     this._formError.textContent = '';
   }
 
   // Метод, проверяющий валидность инпута
-  _checkInputValidity(form, input) {
-    this._formError = form.querySelector(`.${input.id}-error`);
+  _checkInputValidity(input) {
     if (!input.validity.valid) {
       this._showInputError(input, input.validationMessage);
     } else {
@@ -42,12 +36,12 @@ class FormValidator {
 
   // Методы присваивания активности кнопке
   _disableButton() {
-    this._submitButton.classList.add(this._inactiveButtonClass);
-    this._submitButton.disabled = true;
+    this._submitButtonSelector.classList.add(this._inactiveButtonClass);
+    this._submitButtonSelector.disabled = true;
   }
   _enableButton() {
-    this._submitButton.classList.remove(this._inactiveButtonClass);
-    this._submitButton.disabled = false;
+    this._submitButtonSelector.classList.remove(this._inactiveButtonClass);
+    this._submitButtonSelector.disabled = false;
   }
 
   // Метод проверки валидных инпутов для кнопки submit
@@ -65,48 +59,25 @@ class FormValidator {
   }
 
   // Метод, добавляющий слушатели
-  _setEventListeners(form) {
-    form.addEventListener('submit', (evt) =>{
-      evt.preventDefault();
-    });
-    this._toggleButtonState();
+  _setEventListeners() {
     this._inputList.forEach((input) => {
-      input.addEventListener('input', () => {
-        this._checkInputValidity(form, input);
+      input.addEventListener('input', () =>{
+        this._checkInputValidity(input);
         this._toggleButtonState();
       });
     });
-
   }
-
-  // Методы сброса ошибки
-  resetForm(popup) {
-    this._formElement = popup.querySelector(this._formSelector);
-    this._inputList = this._formElement.querySelectorAll(this._inputSelector);
+  
+  // Публичный метод сброса ошибки
+  setDefaultButton() {
     this._inputList.forEach((input) => {
-      this._formError = this._formElement.querySelector(`.${input.id}-error`);
       this._hideInputError(input);
-    });
+      this._toggleButtonState();
+    })
   }
-  setDefaultButton(popup) {
-    this._formElement = popup.querySelector(this._formSelector);
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    this._submitButton = popup.querySelector(this._submitButtonSelector);
-    this._toggleButtonState();
-  }
-
-
+  
   // Публичный метод, который собирает данные из верстки
   enableValidation() {
-    this._formList = Array.from(document.querySelectorAll(this._formSelector));
-    this._formList.forEach((form) => {
-      this._inputList = Array.from(form.querySelectorAll(this._inputSelector));
-      this._submitButton = form.querySelector(this._submitButtonSelector);
-      this._setEventListeners(form);
-    });
+    this._setEventListeners();
   }
 }
-
-
-const formValidator = new FormValidator(selectors);
-const elementformValidator = formValidator.enableValidation();

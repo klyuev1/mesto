@@ -1,5 +1,8 @@
+// Импорт всех классов и объектов с данными
+import {initialCards,selectors} from './array.js'
 import {Card} from './Card.js';
-import {initialCards} from './array.js'
+import {FormValidator} from './FormValidator.js'
+
 // Объявление всех переменных
 // Объявление всех попапов и кнопки закрытия
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -26,6 +29,8 @@ const cardTitle = document.querySelector('.popup__card-title');
 const popupZoomCard = document.querySelector('.popup_type_card');
 // Объявление кнопки закрытия для всех попапов (нодлист)
 const closeButtons = document.querySelectorAll('.popup__button-close');
+// Массив форм
+const formList = Array.from(document.querySelectorAll('.popup__form'));
 
 
 // Функция закрытия профиля по клавише Escape
@@ -66,13 +71,6 @@ profileEdit.addEventListener('click', () => {
   inputPopupOccupation.value = userOccupation.textContent;
 });
 
-// Добавление слушателя для кнопки "Добавить карточку"
-cardAdd.addEventListener('click', () => {
-  openPopup(popupAddCard);
-  elementResetForm(popupAddCard);
-  // setDefaultButton(popupAddCard,selectors);
-});
-
 // Передача данных из попапа в профиль
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -90,47 +88,14 @@ function handleCardClick(name, link) {
   openPopup(popupZoomCard);
 }
 
-
-// // Обработка одной фотокарточки из массива
-// function addElement(item) {
-//   const elementCopy = element.cloneNode(true);
-//   const elementImage = elementCopy.querySelector('.element__image');
-//   const elementTitle = elementCopy.querySelector('.element__title');
-//   const cardZoom = elementCopy.querySelector('.element__image-button');
-//   const elementLike = elementCopy.querySelector('.element__like');
-//   const deleteCard = elementCopy.querySelector('.element__remove');
-
-//   //Добавление кнопки "Удалить карточку"
-//   deleteCard.addEventListener('click', () => {
-//     const choiseCard = deleteCard.closest('.element');
-//     choiseCard.remove();
-//   });
-
-//   //Добавление кнопки "Лайк"
-//   elementLike.addEventListener('click',(evt) => {
-//     evt.target.classList.toggle('element__like_active');
-//   });
-
-//   //Добавление зума
-//   cardZoom.addEventListener('click', handleImgPopup);
-
-//   //Присваивание данных из массива элементам
-//   elementTitle.textContent = item.name;
-//   elementImage.setAttribute('src',item.link);
-//   elementImage.setAttribute('alt',item.name);
-
-//   return elementCopy;
-// };
-
-
-// Обработка массива при помощи функции addElement
+// Обработка массива при помощи класса Card
 initialCards.forEach((item) => {
   const card = new Card(item, '#element',handleCardClick);
   const elementCard = card.generateCard();
   elements.append(elementCard);
 });
 
-//Добавление новой карточки
+//Добавление новой карточки при помощи класса Card
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
   const cardList = {
@@ -144,3 +109,21 @@ function handleFormSubmitCard(evt) {
   evt.target.reset();
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);
+
+// Обработка валидации инпутов при помощи FormValidator
+
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator(selectors, formElement);
+  formValidator.setDefaultButton();
+  formValidator.enableValidation();
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    formValidator.enableValidation();
+  });
+  // Добавление слушателя для кнопки "Добавить карточку"
+  cardAdd.addEventListener('click', () => {
+    openPopup(popupAddCard);
+    formElementCard.reset();
+    formValidator.setDefaultButton();   
+  });
+});
