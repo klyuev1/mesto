@@ -88,10 +88,15 @@ function handleCardClick(name, link) {
   openPopup(popupZoomCard);
 }
 
+// Функция вызова класса Card
+function createNewCard(item) {
+  const card = new Card(item, '#element',handleCardClick);
+  return card.generateCard();
+}
+
 // Обработка массива при помощи класса Card
 initialCards.forEach((item) => {
-  const card = new Card(item, '#element',handleCardClick);
-  const elementCard = card.generateCard();
+  const elementCard = createNewCard(item);
   elements.append(elementCard);
 });
 
@@ -102,8 +107,7 @@ function handleFormSubmitCard(evt) {
     link: inputPopupLink.value,
     name: inputPopupTitle.value
   }
-  const card = new Card(cardList, '#element', handleCardClick);
-  const elementCard = card.generateCard();
+  const elementCard = createNewCard(cardList);
   elements.prepend(elementCard);
   closePopup(popupAddCard);
   evt.target.reset();
@@ -118,7 +122,6 @@ formList.forEach((formElement) => {
   formValidator.enableValidation();
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    formValidator.enableValidation();
   });
   // Добавление слушателя для кнопки "Добавить карточку"
   cardAdd.addEventListener('click', () => {

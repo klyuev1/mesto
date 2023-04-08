@@ -56,3 +56,6 @@
 @import url(../blocks/popup/__card/popup__card.css);
 @import url(../blocks/popup/__card-title/popup__card-title.css);
 @import url(../blocks/popup/__card-image/popup__card-image.css);
+
+/* Правила для main */
+@import url(../blocks/main/main.css);

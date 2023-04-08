@@ -5,4 +5,5 @@
   background-color: transparent;
   cursor: pointer;
   width: 100%;
+  min-height: 282px;
 }
