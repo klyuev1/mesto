@@ -1,4 +1,5 @@
 // Импорт всех классов и объектов с данными
+import './index.css';
 import { initialCards, selectors, } from '../utils/constants.js';
 import {Card} from '../сomponents/Card.js';
 import {FormValidator} from '../сomponents/FormValidator.js';
@@ -6,14 +7,14 @@ import {Section} from '../сomponents/Section.js';
 import {PopupWithForm} from '../сomponents/PopupWithForm.js';
 import {PopupWithImage} from '../сomponents/PopupWtihImage.js';
 import {UserInfo} from '../сomponents/UserInfo.js';
-import {popupProfile, popupCard, cardAdd, profileEdit, inputPopupName, inputPopupOccupation, inputPopupTitle, inputPopupLink, formElementCard, popupZoom, formList} from '../utils/elements.js';
+import {cardAdd, profileEdit, inputPopupName, inputPopupOccupation, inputPopupTitle, inputPopupLink, formElementCard, formList} from '../utils/elements.js';
 
 // Экземпляр класса Popup "Редактировать профиль"
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 
 
 // Экземпляр класса Popup "Редактировать профиль"
-const popupEditProfile = new PopupWithForm(popupProfile, handleFormSubmitProfile);
+const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', handleFormSubmitProfile);
 popupEditProfile.setEventListeners();
 
 profileEdit.addEventListener('click', () => {
@@ -30,7 +31,7 @@ function handleFormSubmitProfile(InputList) {
 }
 
 // Экземлпяр класса Popup "Добавить карточку"
-const popupAddCard = new PopupWithForm(popupCard); // Сюда не передается функция
+const popupAddCard = new PopupWithForm('.popup_type_add-card'); // Сюда не передается функция
 popupAddCard.setEventListeners();
 
 cardAdd.addEventListener('click', () => {
@@ -38,7 +39,7 @@ cardAdd.addEventListener('click', () => {
 });
 
 // Экземпляр класса Popup "Открыть изображение"
-const popupZoomCard = new PopupWithImage(popupZoom);
+const popupZoomCard = new PopupWithImage('.popup_type_card');
 popupZoomCard.setEventListeners();
 
 // Функция зума
