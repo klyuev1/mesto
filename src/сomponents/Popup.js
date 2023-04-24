@@ -11,13 +11,14 @@ export class Popup {
 
   openPopup() {
     this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
   }
   closePopup() {
     this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', (evt) => this._handleEscClose(evt));
   }
   setEventListeners() {
     this._popupCloseButton.addEventListener('click', () => this.closePopup());
-    document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
     this._popupSelector.addEventListener('click', (evt) => {
       if (evt.currentTarget === evt.target) {
         this.closePopup();

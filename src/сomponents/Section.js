@@ -10,10 +10,6 @@ export class Section {
   }
 
   //clear() {}
-  renderItem(card) {
-    //this.clear();
-    this._renderer(card);
-  }
 
   renderItems() {
     //this.clear();
