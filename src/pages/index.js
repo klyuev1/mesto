@@ -7,7 +7,7 @@ import {Section} from '../сomponents/Section.js';
 import {PopupWithForm} from '../сomponents/PopupWithForm.js';
 import {PopupWithImage} from '../сomponents/PopupWtihImage.js';
 import {UserInfo} from '../сomponents/UserInfo.js';
-import {cardAdd, profileEdit, inputPopupName, inputPopupOccupation, formElementCard, formList} from '../utils/elements.js';
+import {cardAdd, profileEdit, inputPopupName, inputPopupOccupation, formElementCard, FormElementProfile, FormElementCard} from '../utils/elements.js';
 
 // Экземпляры классов и их колбэки
 // Экземпляр класса Popup "Редактировать профиль"
@@ -74,22 +74,22 @@ cardAdd.addEventListener('click', () => {
 });
 
 
-// Обработка валидации инпутов при помощи FormValidator
-formList.forEach((formElement) => {
-  const formValidator = new FormValidator(selectors, formElement);
-  formValidator.setDefaultButton();
-  formValidator.enableValidation();
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
-  // Добавление слушателя для кнопки "Редактировать профиль" - сброс попапа
-  profileEdit.addEventListener ('click', () => {
-    formElementCard.reset();
-    formValidator.setDefaultButton();
-  });
-  // Добавление слушателя для кнопки "Добавить карточку" - сброс попапа
-  cardAdd.addEventListener('click', () => {
-    formElementCard.reset();
-    formValidator.setDefaultButton();
-  });
+// Обработка валидации инпутов Профиля при помощи FormValidator
+const formValidatorProfile = new FormValidator(selectors, FormElementProfile);
+formValidatorProfile.enableValidation();
+
+// Добавление слушателя для кнопки "Редактировать профиль" - сброс попапа
+profileEdit.addEventListener ('click', () => {
+  formElementCard.reset();
+  formValidatorProfile.setDefaultButton();
+});
+
+// Обработка валидации инпутов Профиля при помощи FormValidator
+const formValidatorCard = new FormValidator(selectors, FormElementCard);
+formValidatorCard.enableValidation();
+
+// Добавление слушателя для кнопки "Добавить карточку" - сброс попапа
+cardAdd.addEventListener('click', () => {
+  formElementCard.reset();
+  formValidatorCard.setDefaultButton();
 });

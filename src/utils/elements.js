@@ -7,5 +7,6 @@ export const inputPopupName = document.querySelector('.popup__input[name=name]')
 export const inputPopupOccupation = document.querySelector('.popup__input[name=occupation]');
 // Объявление инпутов и формы для карточек
 export const formElementCard = document.querySelector('.popup__form[name=card]');
-// Массив форм
-export const formList = Array.from(document.querySelectorAll('.popup__form'));
+// Формы профиля и карточки форм
+export const FormElementProfile = document.querySelector('.popup__form[name=profile]');
+export const FormElementCard = document.querySelector('.popup__form[name=card]');
