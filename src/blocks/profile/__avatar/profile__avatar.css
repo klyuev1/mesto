@@ -3,10 +3,14 @@
   width: 120px;
   border-radius: 50%;
   margin-right: 30px;
+  transition: opacity .2s linear;
 }
 
 @media screen and (max-width: 800px){
   .profile__avatar {
     margin: 0;
   }
+}
+.profile__avatar:hover {
+  opacity: 0.2;
 }

@@ -10,3 +10,5 @@ export const formElementCard = document.querySelector('.popup__form[name=card]')
 // Формы профиля и карточки форм
 export const FormElementProfile = document.querySelector('.popup__form[name=profile]');
 export const FormElementCard = document.querySelector('.popup__form[name=card]');
+export const AvatarButton = document.querySelector('.profile__avatar-button');
+export const FormElementAvatar = document.querySelector('.popup__form[name=update]');

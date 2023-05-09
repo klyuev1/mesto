@@ -17,7 +17,9 @@
 
     <section class="profile">
       <div class="profile__section">
-        <img class="profile__avatar" src="<%=require('./images/profile-image.png')%>" alt="аватар человека">
+        <button class="profile__avatar-button" type="button">
+          <img class="profile__avatar" alt="Аватар человека">
+        </button>
         <div class="profile__info">
           <div class="profile__title-block">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -36,7 +38,10 @@
           <button type="button" class="element__image-button"><img class="element__image"></button>
           <div class="element__sign">
             <h3 class="element__title"></h3>
-            <button type="button" class="element__like"></button>
+            <div class="element__like-block">
+              <button type="button" class="element__like"></button>
+              <p class="element__like-text">1</p>
+            </div>
           </div>
         </div>
       </template>
@@ -91,6 +96,32 @@
       <button type="button" class="popup__button-close popup__button-close_card"></button>
     </div>
   </div>
+
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <form class="popup__form" name="delete" novalidate>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__button-save">Да</button>
+      </form>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_avatar">
+    <div class="popup__container">
+      <form class="popup__form" name="update" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <label class="popup__label">
+          <input id="avatar" type="url" class="popup__input" name="avatar" placeholder="Ссылка на картинку" required>
+          <span class="avatar-error"></span>
+        </label>
+        <button type="submit" class="popup__button-save">Сохранить</button>
+      </form>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
+
+
 
   <script type="module" src="./pages/index.js"></script>
 </body>
