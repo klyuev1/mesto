@@ -1,6 +1,7 @@
 // Импорт всех классов и объектов с данными
 import './index.css';
 import {selectors} from '../utils/constants.js';
+import {renderLoading} from '../utils/utils.js';
 import {Card} from '../сomponents/Card.js';
 import {FormValidator} from '../сomponents/FormValidator.js';
 import {Section} from '../сomponents/Section.js';
@@ -9,7 +10,7 @@ import {PopupWithImage} from '../сomponents/PopupWtihImage.js';
 import {PopupWithConfirmation} from '../сomponents/PopupWithConfirmation.js';
 import {UserInfo} from '../сomponents/UserInfo.js';
 import {Api} from '../сomponents/Api.js';
-import {cardAdd, profileEdit, inputPopupName, inputPopupOccupation, formElementCard, FormElementProfile, FormElementCard, AvatarButton, FormElementAvatar} from '../utils/elements.js';
+import {cardAdd, profileEdit, inputPopupName, inputPopupOccupation, formElementCard, FormElementProfile, FormElementCard, buttonOpenUpdteAvatarForm, FormElementAvatar} from '../utils/elements.js';
 
 let createCardSection = null;
 let userId = '';
@@ -23,33 +24,50 @@ export const api = new Api({
 });
 
 // Сервер. Полечение данных о профиле и карточках
-api.getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data.name, data.about);
-    userInfo.setUserAvatar(data.avatar);
-    userId = data._id;
-  })
-  .catch((err) => {
-    console.log(err);
-});
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then((res) => {
+  const [Userdata, Cardsdata] = res;
+  userInfo.setUserInfo(Userdata.name, Userdata.about);
+  userInfo.setUserAvatar(Userdata.avatar);
+  userId = Userdata._id;
 
-api.getInitialCards()
-  .then((CardsData) => {
-    createCardSection = new Section (
+  createCardSection = new Section (
     { 
-      data: CardsData,
-      renderer: (item) => renderCard(item)},'.elements');
+      data: Cardsdata,
+      renderer: (item) => createCardSection.setItem(renderCard(item))
+    },'.elements');
       createCardSection.renderItems();
-  })
-  .catch((err) => {
-    console.log(err);
+})
+.catch((err) => {
+  console.log(err);
 });
 
 // Фунция рендеринга карточки при помощи классов Card и Section и ее колбеки
 function renderCard(item) {
-  const card = new Card (item, '#element', userId, handleCardClick, handleCardDelete);
-  const cardElement = card.generateCard();
-  createCardSection.setItem(cardElement);
+  const card = new Card (item, '#element', userId, handleCardClick, handleCardDelete, handleLike, handleDislike);
+  return card.generateCard();
+}
+
+function handleLike(сard) {
+  api.likeCard(сard._cardId)
+  .then((res) => {
+    сard.likesSum(res);
+    сard.likeButton();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+function handleDislike(сard) {
+  api.dislikeCard(сard._cardId)
+  .then((res) => {
+    сard.likesSum(res); 
+    сard.dislikeButton();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }
 
 function handleCardClick(name, link) {
@@ -74,23 +92,24 @@ function handleFormDelete(cardId, element) {
 }
 
 function handleFormSubmitCard(inputList, submitButton) {
-  submitButton.textContent = 'Сохранение...';
+  renderLoading(submitButton,'Сохранение...');
   const cardData = {
     link: inputList['link'],
     name: inputList['title']
   };
   api.postNewCard(cardData)
   .then((data) =>{
-    renderCard(data);
+    createCardSection.setNewItem(renderCard(data));
+    popupAddCard.closePopup();
   })
   .catch((err) => {
     console.log(err);
   })
-  .finally(() => submitButton.textContent = 'Сохранить');
+  .finally(() => renderLoading(submitButton,'Сохранить'));
 }
 
 function handleFormSubmitProfile(InputList, submitButton) {
-  submitButton.textContent = 'Сохранение...';
+  renderLoading(submitButton,'Сохранение...');
   api.patchUserInfo(InputList['name'], InputList['occupation'])
   .then((res) => {
     userInfo.setUserInfo(InputList['name'], InputList['occupation']);
@@ -99,19 +118,20 @@ function handleFormSubmitProfile(InputList, submitButton) {
   .catch((err) => {
     console.log(err);
   })
-  .finally(() => submitButton.textContent = 'Сохранить');
+  .finally(() => renderLoading(submitButton,'Сохранить'));
 }
 
 function handleFormSubmitAvatar(inputList, submitButton) {
-  submitButton.textContent = 'Сохранение...';
+  renderLoading(submitButton,'Сохранение...');
   api.patchAvatar(inputList['avatar'])
   .then((res)=> {
     userInfo.setUserAvatar(res.avatar);
+    popupAvatar.closePopup();
   })
   .catch((err) => {
     console.log(err);
   })
-  .finally(() => submitButton.textContent = 'Сохранить');
+  .finally(() => renderLoading(submitButton,'Сохранить'));
 }
 
 // Экзмемпляры классов
@@ -160,7 +180,7 @@ cardAdd.addEventListener('click', () => {
   formValidatorCard.setDefaultButton();
 });    
 
-AvatarButton.addEventListener('click', () => {
+buttonOpenUpdteAvatarForm.addEventListener('click', () => {
   popupAvatar.openPopup();
   FormElementAvatar.reset();
   formValidatorAvatar.setDefaultButton();

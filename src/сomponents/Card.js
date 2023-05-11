@@ -1,7 +1,5 @@
-import {api} from '../pages/index.js';
-
 export class Card {
-  constructor(data, cardTemplateSelector, userId, handleCardClick, handleCardDelete) {
+  constructor(data, cardTemplateSelector, userId, handleCardClick, handleCardDelete, handleLike, handleDislike) {
     this._data = data;
     this._link = data.link;
     this._name = data.name;
@@ -10,6 +8,8 @@ export class Card {
     this._likeStatus = false;
     this._userId = userId;
     this._handleCardDelete = handleCardDelete;
+    this._handleLike = handleLike;
+    this._handleDislike = handleDislike;
     
     this._cardTemplateSelector = cardTemplateSelector;
     this._handleCardClick = handleCardClick;
@@ -24,33 +24,26 @@ export class Card {
     return cardElement;
   }
 
-  _setLike() {
-    this._elementLike.classList.add('element__like_active');
-    this._likeStatus = true;
+  likesSum(card) {
+    this._likes = card.likes;
+    this._elementLikeText.textContent = this._likes.length;
   }
 
-  _setDislike() {
-    this._elementLike.classList.remove('element__like_active');
-    this._likeStatus = false;
+  likeButton() {
+      this._elementLike.classList.add('element__like_active');
+      this._likeStatus = true;  
   }
-
-  _likesSum(num) {
-    this._elementLikeText.textContent = num;
+  dislikeButton() {
+      this._elementLike.classList.remove('element__like_active');
+      this._likeStatus = false;
   }
 
   // Методы для работы лайка (сервер)
   _toggleLike() {
-    if (this._likeStatus=== false) {
-      api.likeCard(this._cardId).then((res) => {
-        this._setLike();
-        this._likesSum(res.likes.length);
-        
-      });
+    if (this._likeStatus === false) {
+      this._handleLike(this);
     } else {
-      api.dislikeCard(this._cardId).then((res) => {
-        this._setDislike()
-        this._likesSum(res.likes.length);
-      });
+      this._handleDislike(this);
     }
   }
 
@@ -86,7 +79,7 @@ export class Card {
     // Если в списке лайков есть мой -- сердечко черное
     for (let i = 0; i < this._data.likes.length; i++) {
       if ((this._data.likes[i]._id) === this._userId) {
-        this._setLike();
+        this.likeButton();
       }
     }
     // Если это не моя карта -- я не могу ее удалить
